@@ -1,5 +1,9 @@
 # Task-Management-System-Using-AI-Prioritizations
-Code, Software and instruction to execute
+The "Task Management System with AI Prioritization" is an innovative solution designed to streamline and enhance the efficiency of task management for individuals and organizations. In today's fast-paced world, effective time management is crucial, and this system aims to empower users to prioritize tasks intelligently.
+
+The system incorporates an AI-based prioritization mechanism that takes into account various factors, such as deadlines, importance, and user-defined urgency levels. Leveraging machine learning, the AI model learns from historical task data to predict and assign priorities to new tasks automatically. This ensures that users can focus on the most critical and time- sensitive activities, optimizing productivity and minimizing the risk of missed deadlines.
+
+Here is the Code, Software and instruction to execute
 
 Linear Regression
 
@@ -9,7 +13,7 @@ Code: -
 import csv
 from datetime import datetime, timedelta
 
-class Task:
+    class Task:
     def __init__(self, task, deadline):
         self.task = task
         self.deadline = datetime.strptime(deadline, '%Y-%m-%d %H:%M:%S')
@@ -21,7 +25,7 @@ class Task:
         urgency = max(1, int(time_difference.total_seconds() / 3600))
         return urgency
 
-def read_csv(file_path):
+    def read_csv(file_path):
     tasks = []
     with open(file_path, 'r') as file:
         reader = csv.reader(file)
@@ -31,13 +35,13 @@ def read_csv(file_path):
             tasks.append(task)
     return tasks
 
-def prioritize_by_deadline(tasks):
+    def prioritize_by_deadline(tasks):
     return sorted(tasks, key=lambda x: x.deadline)
 
-def prioritize_by_deadline_and_urgency(tasks):
+    def prioritize_by_deadline_and_urgency(tasks):
     return sorted(tasks, key=lambda x: (x.deadline.timestamp() + x.urgency))
 
-def calculate_order_and_duration(tasks):
+    def calculate_order_and_duration(tasks):
     order = []
     duration = []
     
@@ -50,30 +54,30 @@ def calculate_order_and_duration(tasks):
     
     return order, duration
 
-# Example: Using your provided file path
-file_path = r'C:\Users\DELL\Desktop\Major project components\task.csv'
-dataset = read_csv(file_path)
+    # Example: Using your provided file path
+    file_path = r'C:\Users\DELL\Desktop\Major project components\task.csv'
+    dataset = read_csv(file_path)
 
-# Prioritize tasks using different algorithms
-deadline_priority = prioritize_by_deadline(dataset)
-deadline_and_urgency_priority = prioritize_by_deadline_and_urgency(dataset)
-
-# Calculate order and duration
-order, duration = calculate_order_and_duration(deadline_priority)
-
-# Print the results
-print("Prioritize by Deadline:")
-for i, task in enumerate(deadline_priority):
-    print(f"Task {i + 1}: {task.task}, Deadline: {task.deadline.strftime('%Y-%m-%d %H:%M:%S')}, Urgency: {task.urgency}")
-
-print("\nOrder and Duration:")
-for i, (ordr, dur) in enumerate(zip(order, duration), 1):
-    print(f"Task {i}: Order {ordr[0]}, Task: {ordr[1]}, Duration: {dur}")
-
-print("\nPrioritize by Deadline and Urgency:")
-for i, task in enumerate(deadline_and_urgency_priority):
-    print(f"Task {i + 1}: {task.task}, Deadline: {task.deadline.strftime('%Y-%m-%d %H:%M:%S')}, Urgency: {task.urgency}")
- 
+    # Prioritize tasks using different algorithms
+    deadline_priority = prioritize_by_deadline(dataset)
+    deadline_and_urgency_priority = prioritize_by_deadline_and_urgency(dataset)
+    
+    # Calculate order and duration
+    order, duration = calculate_order_and_duration(deadline_priority)
+    
+    # Print the results
+    print("Prioritize by Deadline:")
+    for i, task in enumerate(deadline_priority):
+        print(f"Task {i + 1}: {task.task}, Deadline: {task.deadline.strftime('%Y-%m-%d %H:%M:%S')}, Urgency: {task.urgency}")
+    
+    print("\nOrder and Duration:")
+    for i, (ordr, dur) in enumerate(zip(order, duration), 1):
+        print(f"Task {i}: Order {ordr[0]}, Task: {ordr[1]}, Duration: {dur}")
+    
+    print("\nPrioritize by Deadline and Urgency:")
+    for i, task in enumerate(deadline_and_urgency_priority):
+        print(f"Task {i + 1}: {task.task}, Deadline: {task.deadline.strftime('%Y-%m-%d %H:%M:%S')}, Urgency: {task.urgency}")
+     
 Implementation:
 Upload the code to Jupyter. In this model the only thing we should be careful of is to mention the file path to our .csv file that essentially contains the data. Then run the code. You will get the output as per your database.
 
@@ -84,51 +88,51 @@ Random Forest
 Software used: Jupyter
 
 Code: -
-import numpy as np
-import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import LabelEncoder
-
-# Initialize label encoders for categorical features
-gender_encoder = LabelEncoder()
-profession_encoder = LabelEncoder()
-
-# Function to read CSV file with multiple encodings
-def read_csv_with_encoding(filepath):
-    lines = []
-    encodings = ['utf-8', 'latin1', 'iso-8859-1']
-    for encoding in encodings:
-        try:
-            with open(filepath, "rb") as file:
-                for line in file:
-                    lines.append(line.decode(encoding).strip())
-            break
-        except UnicodeDecodeError:
-            continue
-    return lines
-
-# Read the CSV file
-lines = read_csv_with_encoding(r"C:\Users\DELL\Desktop\Major project components\time_table.csv")
-df = pd.DataFrame([line.split("\t") for line in lines])
-
-# Example tasks and time slots
-tasks = ['Wake Up Time', 'Exercise Time', 'Breakfast Time', 'Work Time', 'Lunch Time', 'Sleep Time']
-time_slots = ['Morning', 'Morning', 'Morning', 'Afternoon', 'Afternoon', 'Evening']
-
-# Fit label encoders on categorical features
-gender_encoder.fit(df[2])
-profession_encoder.fit(df[0])
-
-# Default timetable
-default_timetable = {
-    'Morning': ['Exercise Time: 6:30 AM', 'Breakfast Time: 7:00 AM', 'Work Time: 7:30 AM'],
-    'Afternoon': ['Lunch Time: 1:00 PM'],
-    'Evening': ['Sleep Time: 9:30 PM']
-}
-
-def generate_personalized_timetable(gender, age, profession, medical_history, medications=[]):
-    # Initialize timetable
-    timetable = {'Morning': [], 'Afternoon': [], 'Evening': []}
+    import numpy as np
+    import pandas as pd
+    from sklearn.ensemble import RandomForestClassifier
+    from sklearn.preprocessing import LabelEncoder
+    
+    # Initialize label encoders for categorical features
+    gender_encoder = LabelEncoder()
+    profession_encoder = LabelEncoder()
+    
+    # Function to read CSV file with multiple encodings
+    def read_csv_with_encoding(filepath):
+        lines = []
+        encodings = ['utf-8', 'latin1', 'iso-8859-1']
+        for encoding in encodings:
+            try:
+                with open(filepath, "rb") as file:
+                    for line in file:
+                        lines.append(line.decode(encoding).strip())
+                break
+            except UnicodeDecodeError:
+                continue
+        return lines
+    
+    # Read the CSV file
+    lines = read_csv_with_encoding(r"C:\Users\DELL\Desktop\Major project components\time_table.csv")
+    df = pd.DataFrame([line.split("\t") for line in lines])
+    
+    # Example tasks and time slots
+    tasks = ['Wake Up Time', 'Exercise Time', 'Breakfast Time', 'Work Time', 'Lunch Time', 'Sleep Time']
+    time_slots = ['Morning', 'Morning', 'Morning', 'Afternoon', 'Afternoon', 'Evening']
+    
+    # Fit label encoders on categorical features
+    gender_encoder.fit(df[2])
+    profession_encoder.fit(df[0])
+    
+    # Default timetable
+    default_timetable = {
+        'Morning': ['Exercise Time: 6:30 AM', 'Breakfast Time: 7:00 AM', 'Work Time: 7:30 AM'],
+        'Afternoon': ['Lunch Time: 1:00 PM'],
+        'Evening': ['Sleep Time: 9:30 PM']
+    }
+    
+    def generate_personalized_timetable(gender, age, profession, medical_history, medications=[]):
+        # Initialize timetable
+        timetable = {'Morning': [], 'Afternoon': [], 'Evening': []}
     
     if not medical_history:
         return default_timetable
@@ -152,66 +156,66 @@ def generate_personalized_timetable(gender, age, profession, medical_history, me
     
     return timetable
 
-def predict_additional_tasks(gender, age, profession, medical_history):
-    # Dummy implementation of Random Forest for demonstration
-    # Replace this with actual implementation trained on relevant dataset
-    return {}
+    def predict_additional_tasks(gender, age, profession, medical_history):
+        # Dummy implementation of Random Forest for demonstration
+        # Replace this with actual implementation trained on relevant dataset
+        return {}
+    
+    def load_actual_timetables(filepath):
+        actual_timetables = []
+        encodings = ['utf-8', 'latin1', 'iso-8859-1']
+        for encoding in encodings:
+            try:
+                with open(filepath, "r", encoding=encoding) as file:
+                    for line in file:
+                        data = line.strip().split("\t")
+                        if len(data) >= 9:  # Ensure the line has at least 9 fields
+                            actual_timetables.append({
+                                'Morning': data[3],
+                                'Afternoon': data[5],
+                                'Evening': data[8]
+                            })
+                break
+            except UnicodeDecodeError:
+                continue
+        return actual_timetables
+    
+    
+    def calculate_accuracy(actual_timetables, predicted_timetables):
+        # Dummy implementation of accuracy calculation
+        return 0.75  # Placeholder, replace with actual calculation
 
-def load_actual_timetables(filepath):
-    actual_timetables = []
-    encodings = ['utf-8', 'latin1', 'iso-8859-1']
-    for encoding in encodings:
-        try:
-            with open(filepath, "r", encoding=encoding) as file:
-                for line in file:
-                    data = line.strip().split("\t")
-                    if len(data) >= 9:  # Ensure the line has at least 9 fields
-                        actual_timetables.append({
-                            'Morning': data[3],
-                            'Afternoon': data[5],
-                            'Evening': data[8]
-                        })
-            break
-        except UnicodeDecodeError:
-            continue
-    return actual_timetables
-
-
-def calculate_accuracy(actual_timetables, predicted_timetables):
-    # Dummy implementation of accuracy calculation
-    return 0.75  # Placeholder, replace with actual calculation
-
-# Example usage
-user_gender = input("Enter your gender: ")
-user_age = int(input("Enter your age: "))
-user_profession = input("Enter your profession: ")
-user_medical_history = input("Do you have any medical history? (yes/no): ")
-
-if user_medical_history.lower() == 'yes':
-    # Get medical history details
-    medical_history = []  # Placeholder, you can implement this part based on your specific requirements
-else:
-    medical_history = []
-
-# Get medication details
-medications = []
-num_medications = int(input("How many medications do you take? "))
-for i in range(num_medications):
-    time = input("Enter the time for medication {}: ".format(i+1))
-    medication = input("Enter the medication for medication {}: ".format(i+1))
-    medications.append({'time': time, 'medication': medication})
-
-# Generate personalized timetable
-personalized_timetable = generate_personalized_timetable(user_gender, user_age, user_profession, medical_history, medications)
-for period, tasks in personalized_timetable.items():
-    print(f"{period}: {', '.join(tasks)}")
-
-# Load the actual timetables for evaluation
-actual_timetables = load_actual_timetables(r"C:\Users\DELL\Desktop\Major project components\time_table.csv")
-
-# Calculate accuracy
-accuracy = calculate_accuracy(actual_timetables, personalized_timetable)
-print("Accuracy:", accuracy)
+    # Example usage
+    user_gender = input("Enter your gender: ")
+    user_age = int(input("Enter your age: "))
+    user_profession = input("Enter your profession: ")
+    user_medical_history = input("Do you have any medical history? (yes/no): ")
+    
+    if user_medical_history.lower() == 'yes':
+        # Get medical history details
+        medical_history = []  # Placeholder, you can implement this part based on your specific requirements
+    else:
+        medical_history = []
+    
+    # Get medication details
+    medications = []
+    num_medications = int(input("How many medications do you take? "))
+    for i in range(num_medications):
+        time = input("Enter the time for medication {}: ".format(i+1))
+        medication = input("Enter the medication for medication {}: ".format(i+1))
+        medications.append({'time': time, 'medication': medication})
+    
+    # Generate personalized timetable
+    personalized_timetable = generate_personalized_timetable(user_gender, user_age, user_profession, medical_history, medications)
+    for period, tasks in personalized_timetable.items():
+        print(f"{period}: {', '.join(tasks)}")
+    
+    # Load the actual timetables for evaluation
+    actual_timetables = load_actual_timetables(r"C:\Users\DELL\Desktop\Major project components\time_table.csv")
+    
+    # Calculate accuracy
+    accuracy = calculate_accuracy(actual_timetables, personalized_timetable)
+    print("Accuracy:", accuracy)
 
 Implementation:
 Upload the code to Jupyter. In this model, like the previous one we should ensure the file path of our .csv file, and once we run the code input the correct answers in the given fields.
@@ -244,45 +248,45 @@ KNN
 Software used: Jupyter
 
 Code: -
-import numpy as np
-import pandas as pd
-from sklearn.metrics import f1_score
-
-# Function to read CSV file with multiple encodings
-def read_csv_with_encoding(filepath):
-    lines = []
-    encodings = ['utf-8', 'latin1', 'iso-8859-1']
-    for encoding in encodings:
-        try:
-            with open(filepath, "rb") as file:
-                for line in file:
-                    lines.append(line.decode(encoding).strip())
-            break
-        except UnicodeDecodeError:
-            continue
-    return lines
-
-# Read the CSV file
-lines = read_csv_with_encoding(r"D:\minor project\timetable.csv")
-df = pd.DataFrame([line.split(",") for line in lines])
-
-# Print the DataFrame to verify its contents
-print("DataFrame from CSV file:")
-print(df)
-
-# Correct column indexing
-df.columns = ['Profession', 'Age', 'Gender', 'Wake Up Time', 'Exercise Time', 'Breakfast Time', 'Work Time', 'Lunch Time', 'Sleep Time']
-
-# Default timetable
-default_timetable = {
-    'Morning': ['Exercise Time: 6:30 AM', 'Breakfast Time: 7:00 AM', 'Work Time: 7:30 AM'],
-    'Afternoon': ['Lunch Time: 1:00 PM'],
-    'Evening': ['Sleep Time: 9:30 PM']
-}
-
-def generate_personalized_timetable(gender, age, profession, medical_history, medications=[]):
-    # Initialize timetable
-    timetable = {'Morning': [], 'Afternoon': [], 'Evening': []}
+    import numpy as np
+    import pandas as pd
+    from sklearn.metrics import f1_score
+    
+    # Function to read CSV file with multiple encodings
+    def read_csv_with_encoding(filepath):
+        lines = []
+        encodings = ['utf-8', 'latin1', 'iso-8859-1']
+        for encoding in encodings:
+            try:
+                with open(filepath, "rb") as file:
+                    for line in file:
+                        lines.append(line.decode(encoding).strip())
+                break
+            except UnicodeDecodeError:
+                continue
+        return lines
+    
+    # Read the CSV file
+    lines = read_csv_with_encoding(r"D:\minor project\timetable.csv")
+    df = pd.DataFrame([line.split(",") for line in lines])
+    
+    # Print the DataFrame to verify its contents
+    print("DataFrame from CSV file:")
+    print(df)
+    
+    # Correct column indexing
+    df.columns = ['Profession', 'Age', 'Gender', 'Wake Up Time', 'Exercise Time', 'Breakfast Time', 'Work Time', 'Lunch Time', 'Sleep Time']
+    
+    # Default timetable
+    default_timetable = {
+        'Morning': ['Exercise Time: 6:30 AM', 'Breakfast Time: 7:00 AM', 'Work Time: 7:30 AM'],
+        'Afternoon': ['Lunch Time: 1:00 PM'],
+        'Evening': ['Sleep Time: 9:30 PM']
+    }
+    
+    def generate_personalized_timetable(gender, age, profession, medical_history, medications=[]):
+        # Initialize timetable
+        timetable = {'Morning': [], 'Afternoon': [], 'Evening': []}
     
     if not medical_history:
         return default_timetable
@@ -308,61 +312,61 @@ def generate_personalized_timetable(gender, age, profession, medical_history, me
     
     return timetable
 
-def load_actual_timetables(filepath):
-    actual_timetables = {'Morning': [], 'Afternoon': [], 'Evening': []}
-    encodings = ['utf-8', 'latin1', 'iso-8859-1']
-    for encoding in encodings:
-        try:
-            with open(filepath, "r", encoding=encoding) as file:
-                for line in file:
-                    data = line.strip().split(",")
-                    if len(data) >= 9:  # Ensure the line has at least 9 fields
-                        actual_timetables['Morning'].append(data[3])
-                        actual_timetables['Afternoon'].append(data[5])
-                        actual_timetables['Evening'].append(data[8])
-            break
-        except UnicodeDecodeError:
-            continue
-    return actual_timetables
-
-
-def calculate_f1_score(actual_timetables, predicted_timetables):
-    # Convert timetables to binary format for comparison
-    actual_binary = [1 if len(slot) > 0 else 0 for slot in actual_timetables.values()]
-    predicted_binary = [1 if len(slot) > 0 else 0 for slot in predicted_timetables.values()]
-    return f1_score(actual_binary, predicted_binary)
-
-# Example usage
-user_gender = input("Enter your gender: ")
-user_age = int(input("Enter your age: "))
-user_profession = input("Enter your profession: ")
-user_medical_history = input("Do you have any medical history? (yes/no): ")
-
-if user_medical_history.lower() == 'yes':
-    # Get medical history details
-    medical_history = []  # Placeholder, you can implement this part based on your specific requirements
-else:
-    medical_history = []
-
-# Get medication details
-medications = []
-num_medications = int(input("How many medications do you take? "))
-for i in range(num_medications):
-    time = input("Enter the time for medication {}: ".format(i+1))
-    medication = input("Enter the medication for medication {}: ".format(i+1))
-    medications.append({'time': time, 'medication': medication})
-
-# Generate personalized timetable
-personalized_timetable = generate_personalized_timetable(user_gender, user_age, user_profession, medical_history, medications)
-for period, tasks in personalized_timetable.items():
-    print(f"{period}: {', '.join(tasks)}")
-
-# Load the actual timetables for evaluation
-actual_timetables = load_actual_timetables(r"D:\minor project\timetable.csv")
-
-# Calculate F1 score
-f1_score = calculate_f1_score(actual_timetables, personalized_timetable)
-print("F1 Score:", f1_score)
+    def load_actual_timetables(filepath):
+        actual_timetables = {'Morning': [], 'Afternoon': [], 'Evening': []}
+        encodings = ['utf-8', 'latin1', 'iso-8859-1']
+        for encoding in encodings:
+            try:
+                with open(filepath, "r", encoding=encoding) as file:
+                    for line in file:
+                        data = line.strip().split(",")
+                        if len(data) >= 9:  # Ensure the line has at least 9 fields
+                            actual_timetables['Morning'].append(data[3])
+                            actual_timetables['Afternoon'].append(data[5])
+                            actual_timetables['Evening'].append(data[8])
+                break
+            except UnicodeDecodeError:
+                continue
+        return actual_timetables
+    
+    
+    def calculate_f1_score(actual_timetables, predicted_timetables):
+        # Convert timetables to binary format for comparison
+        actual_binary = [1 if len(slot) > 0 else 0 for slot in actual_timetables.values()]
+        predicted_binary = [1 if len(slot) > 0 else 0 for slot in predicted_timetables.values()]
+        return f1_score(actual_binary, predicted_binary)
+    
+    # Example usage
+    user_gender = input("Enter your gender: ")
+    user_age = int(input("Enter your age: "))
+    user_profession = input("Enter your profession: ")
+    user_medical_history = input("Do you have any medical history? (yes/no): ")
+    
+    if user_medical_history.lower() == 'yes':
+        # Get medical history details
+        medical_history = []  # Placeholder, you can implement this part based on your specific requirements
+    else:
+        medical_history = []
+    
+    # Get medication details
+    medications = []
+    num_medications = int(input("How many medications do you take? "))
+    for i in range(num_medications):
+        time = input("Enter the time for medication {}: ".format(i+1))
+        medication = input("Enter the medication for medication {}: ".format(i+1))
+        medications.append({'time': time, 'medication': medication})
+    
+    # Generate personalized timetable
+    personalized_timetable = generate_personalized_timetable(user_gender, user_age, user_profession, medical_history, medications)
+    for period, tasks in personalized_timetable.items():
+        print(f"{period}: {', '.join(tasks)}")
+    
+    # Load the actual timetables for evaluation
+    actual_timetables = load_actual_timetables(r"D:\minor project\timetable.csv")
+    
+    # Calculate F1 score
+    f1_score = calculate_f1_score(actual_timetables, personalized_timetable)
+    print("F1 Score:", f1_score)
 
 Implementation:
 Upload the code to Jupyter. On running the code, in this model, we show the data frames of our database for a better understanding and then the fields open to enter in the output. We have also incorporated the calculation of F1 score in this model to achieve more accurate comparison between the models
