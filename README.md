@@ -10,8 +10,8 @@ Linear Regression
 Software used: Jupyter
 
 Code: -
-import csv
-from datetime import datetime, timedelta
+    
+    import csv from datetime import datetime, timedelta
 
     class Task:
     def __init__(self, task, deadline):
@@ -88,6 +88,7 @@ Random Forest
 Software used: Jupyter
 
 Code: -
+    
     import numpy as np
     import pandas as pd
     from sklearn.ensemble import RandomForestClassifier
@@ -248,6 +249,7 @@ KNN
 Software used: Jupyter
 
 Code: -
+    
     import numpy as np
     import pandas as pd
     from sklearn.metrics import f1_score
